@@ -170,27 +170,41 @@ public:
 		return result;
 	}
 
-	void generatesubSeq(string &s, string &curr, vector<string> &result, int i){
+	// void generatesubSeq(string &s, string &curr, vector<string> &result, int i){
+	// 	if(i==s.size()){
+	// 		result.push_back(curr);
+	// 		return;
+	// 	}
+
+	// 	for(int x=i;x<s.size();x++){
+	// 		curr.push_back(s[x]); //append
+	// 		generatesubSeq(s, curr, result,x+1);
+
+	// 		curr.pop_back(); //skip
+	// 		generatesubSeq(s, curr, result, x+1);
+	// 	}
+	// }
+
+	// vector<string> subSequence(string &s){
+	// 	vector<string> result;
+	// 	string curr;
+	// 	generatesubSeq(s, curr, result, 0);
+
+	// 	return result;
+	// }
+
+	void subSequence( vector<string>&result,string &s, string &curr, int i ){
 		if(i==s.size()){
 			result.push_back(curr);
 			return;
 		}
 
-		for(int x=i;x<s.size();x++){
-			curr.push_back(s[x]); //append
-			generatesubSeq(s, curr, result,x+1);
+		curr.push_back(s[i]);
+		subSequence(result, s, curr, i+1);
 
-			curr.pop_back(); //skip
-			generatesubSeq(s, curr, result, x+1);
-		}
-	}
+		curr.pop_back();
+		subSequence(result, s, curr, i+1);
 
-	vector<string> subSequence(string &s){
-		vector<string> result;
-		string curr;
-		generatesubSeq(s, curr, result, 0);
-
-		return result;
 	}
 };
 
@@ -257,7 +271,8 @@ int main()
 	string s= "abc";
 
 	vector<string> res;
-	res=sol.subSequence(s);
+	string sss="";
+	sol.subSequence(res, s,sss , 0);
 	for(auto x:res){
 		cout<<x<<endl;
 	}

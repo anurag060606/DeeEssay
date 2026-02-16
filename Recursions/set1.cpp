@@ -206,6 +206,25 @@ public:
 		subSequence(result, s, curr, i+1);
 
 	}
+
+	void subSequenceSum(vector<vector<int>>&result, vector<int>&nums, int target ,vector<int> &curr, int currSum, int indx){
+		if(indx==nums.size()){
+			if(currSum==target)
+				result.push_back(curr);
+			return;
+		}
+
+		if(currSum>target)
+			return;///only valud for positive numbers array
+		curr.push_back(nums[indx]);
+		currSum+=nums[indx];
+		subSequenceSum(result, nums, target, curr, currSum, indx+1);
+
+
+		curr.pop_back();
+		currSum-=nums[indx];
+		subSequenceSum(result, nums, target, curr, currSum, indx+1);
+	}
 };
 
 
@@ -268,12 +287,24 @@ int main()
 	// 	cout<<x<<endl;
 	// }
 
-	string s= "abc";
+	// string s= "abc";
 
-	vector<string> res;
-	string sss="";
-	sol.subSequence(res, s,sss , 0);
+	// vector<string> res;
+	// string sss="";
+	// sol.subSequence(res, s,sss , 0);
+	// for(auto x:res){
+	// 	cout<<x<<endl;
+	// }
+
+	vector<int> nums={4, 2, 10, 5, 1, 3};
+	vector<vector<int>>res;
+
+	vector<int>curr;
+	sol.subSequenceSum(res, nums, 5, curr, 0, 0);
 	for(auto x:res){
-		cout<<x<<endl;
+		for(auto y:x){
+			cout<<y<<" , ";
+		}
+		cout<<endl;
 	}
 }

@@ -53,16 +53,41 @@ vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
     return result;
 }
 
+void subsetSumBFhelper(int indx, int sum , vector<int>&nums, vector<vector<int>>&result){
+	if(indx==nums.size()){
+		result.push_back(sum);
+		return;
+	}
+	subsetSumBFhelper(indx+1, sum+nums[indx], vector, result);
+	subsetSumBFhelper(indx+1, sum, vector, result);
+
+
+}
+
+vector<vector<int>>subsetSumBF(vector<int>&nums){
+	vector<vector<int>>result;
+	subsetSumBFhelper(0, 0, nums, result);
+
+	return result;
+}
+
 int main()
 {
-	vector<int> nums={4, 2, 10, 5, 1, 3};//{4, 9, 2, 5, 1};
-	vector<vector<int>>res;
-	res=subsequenceSum(nums, 5);
-	for(auto x: res){
-		for(auto y:x){
-			cout<<y<<", ";
-		}
-		cout<<endl;
+	// vector<int> nums={4, 2, 10, 5, 1, 3};//{4, 9, 2, 5, 1};
+	// vector<vector<int>>res;
+	// res=subsequenceSum(nums, 5);
+	// for(auto x: res){
+	// 	for(auto y:x){
+	// 		cout<<y<<", ";
+	// 	}
+	// 	cout<<endl;
+	// }
+
+	vector<int>nums={5,2,1};
+	vector<vector<int>>result;
+	result=subsetSumBFhelper(nums);
+	for(auto x:result){
+		cout<<x<<", ";
 	}
 	return 0;
 }
